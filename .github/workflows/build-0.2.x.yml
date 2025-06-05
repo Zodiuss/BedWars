@@ -2,8 +2,8 @@ name: Build and publish BedWars master
 
 on:
   push:
-    branches: [ master ]
-concurrency: bedwars_master
+    branches: [ ver/0.2.x ]
+concurrency: bedwars_0.2.x
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew
+        run: ./gradlew -x publish -x :BedWars:discord
         env:
           NEXUS_URL_RELEASE: ${{ secrets.NEXUS_URL_RELEASE }}
           NEXUS_URL_SNAPSHOT: ${{ secrets.NEXUS_URL_SNAPSHOT }}
